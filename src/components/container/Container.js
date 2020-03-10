@@ -1,4 +1,5 @@
 import React from 'react';
+import Button from '../button/Button'
 
 import './Container.css';
 
@@ -17,7 +18,11 @@ const Container = () => {
       <div className='text-center'>
         <div className='row'>
           <div className='col-md-12'>
-            <button className='btn password-btn'>copy passwd</button>
+            
+            <Button 
+              className='btn password-btn'
+              label='Copy Password'
+             />
           </div>
         </div>
       </div>
