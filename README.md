@@ -1,4 +1,6 @@
-This project is called Password Generator. It allows the user to have the ability to dynamically generate passwords and copy and paste it to any preffered place.
+This project is called Password Generator. It allows the user to have the ability to dynamically create generate customized passwords.
+
+The user has the ability to  copy and paste it to any preffered place.
 
 The user can select random password with combination of numbers, symbols, uppercase, and lowercase letters.
 
