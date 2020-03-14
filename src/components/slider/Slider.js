@@ -6,7 +6,7 @@ const Slider = props => {
   const { step, min, max, value, defaultLength, onChangeValue } = props;
 
   const rangeRef = useRef();
-  const [range, setRange] = useState(defaultLength);
+  let [range, setRange] = useState();
  
 
   const activeRangeColor = '#4aa1f3';
@@ -21,12 +21,11 @@ const Slider = props => {
     rangeRef.current.style.background = newBackgroundStyle;
   };
 
-  // if (range !== defaultLength || !range) {
-  //   // eslint-disable-next-line no-const-assign
-  //   range = defaultLength;
-  // }
+  if (range !== defaultLength || !range) {
+    range = defaultLength;
+  }
 
-  const progressValue = defaultLength;
+  const progressValue = range;
   const progress = (progressValue / max) * 100 + '%';
   const styleInput = {
     background: `linear-gradient(90deg, ${activeRangeColor} 0% ${progress}, ${rangeBackground} ${progress} 100%)`

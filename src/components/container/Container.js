@@ -1,7 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '../button/Button';
 import Slider from '../slider/Slider';
 import CheckBox from '../checkbox/CheckBox';
+import {generatePassword, setPasswordLength} from '../../utils/Helper'
 
 import './Container.css';
 
@@ -33,14 +34,41 @@ const CHECKBOX_LIST = [
 ];
 
 const Container = () => {
-const [rangeValue, setRangeValue] = useState(12)
+  const [rangeValue, setRangeValue] = useState(12);
+  const [checkbox, setCheckBox] = useState({
+    uppercase: true,
+    lowercase: true,
+    symbols: true, 
+    numbers: true
+  })
+
+  const {uppercase, lowercase, symbols, numbers} = checkbox
+  useEffect(() => {
+    setPasswordLength(rangeValue)
+    passwordGenerated(checkbox, rangeValue)
+  }, [uppercase, lowercase, symbols, numbers])
+
+  const passwordGenerated = (checkbox, rangeValue) => {
+    const pwd = generatePassword(checkbox, rangeValue)
+    console.log(pwd)
+  }
 
   const onChangeSlider = e => {
-    setRangeValue(e.target.value)
+    setRangeValue(e.target.value);
   };
 
   const onChangeCheckBox = e => {
-    console.log(e.target.value);
+    // console.log(e.target.checked)
+    let { name, checked } = e.target;
+    CHECKBOX_LIST.map(checkbox => {
+      if (checkbox.name === name) {
+        checkbox.isChecked = checked;
+        setCheckBox({ [name]: checkbox.isChecked})
+      }
+      return '';
+    });
+
+    console.log(CHECKBOX_LIST);
   };
   return (
     <div className='password-settings'>

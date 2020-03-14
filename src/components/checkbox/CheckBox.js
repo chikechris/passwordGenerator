@@ -7,7 +7,7 @@ const CheckBox = props => {
   return (
     <>
     <div className='col-md-3'>
-    <label htmlFor="" className='cntainer'>
+    <label className='container'>
     <h1>{label}</h1>
     <input 
     type="checkbox"
@@ -34,7 +34,7 @@ CheckBox.propTypes = {
   checked: PropTypes.bool.isRequired,
   name: PropTypes.number.isRequired,
   disabled: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 }
 
 export default CheckBox
