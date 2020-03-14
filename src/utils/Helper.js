@@ -68,3 +68,8 @@ setNumber(numbers)
 const password = passwordCharacters()
 return password
 }
+
+export const copyToClipBoard = elementRef => {
+  elementRef.select()
+  document.execCommand('copy')
+}
