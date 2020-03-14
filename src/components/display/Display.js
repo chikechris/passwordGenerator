@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState} from 'react';
 import {Container} from '../container/Container'
 import Button from '../button/Button'
 
 import './Display.css'
 
 const Display = () => {
+
+  const [password, setPassword] = useState('')
+
   return (
     <>
       <div className='row'>
@@ -12,7 +15,7 @@ const Display = () => {
           <div>
             <div className='password-display'>
               <input type='text'
-              value="t"
+              value={password}
                className='password-display-input' 
                readOnly
                />
@@ -34,7 +37,9 @@ const Display = () => {
             </div> 
         </div>
       </div>
-      <Container />
+      <Container 
+         setPassword= {setPassword}
+      />
     </>
   );
 };
