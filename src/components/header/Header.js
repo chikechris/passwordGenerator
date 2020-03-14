@@ -5,7 +5,7 @@ const Header = () => {
   return (
     <div className="row">
     <div className="col-md-12 header">
-      <h1 className="h1">Password Generator</h1>
+      <h2 className="h2">Password Generator</h2>
       <div className="col-md-12">
         <h4>
           Create Your own Password with Password Generator

@@ -35,7 +35,7 @@ const CHECKBOX_LIST = [
 
 const Container = (props) => {
 
-  const {setPassword} = props 
+  const {setPassword, setRange, setPasswordProps} = props 
   const [rangeValue, setRangeValue] = useState(12);
   const [checkbox, setCheckBox] = useState({
     uppercase: true,
@@ -44,19 +44,45 @@ const Container = (props) => {
     numbers: true
   })
 
+const [checked, setChecked] = useState(false) 
+const [checkedName, setCheckedName] = useState('')
+
   const {uppercase, lowercase, symbols, numbers} = checkbox
+
   useEffect(() => {
     setPasswordLength(rangeValue)
-    passwordGenerated(checkbox, rangeValue)
+    setRange(rangeValue)
+    setRangeValue(rangeValue)
+    passwordGenerated(checkbox, rangeValue) 
+    checkBoxCount()
+    
+  // eslint-disable-next-line 
   }, [uppercase, lowercase, symbols, numbers])
+
+  const checkBoxCount = () => {
+    const checkedCount = Object.keys(checkbox).filter(key => checkbox[key])
+    const disabled = checkedCount.length === 1 
+    const name  = checkedCount[0] 
+    if (disabled) {
+      setChecked(disabled) 
+      setCheckedName(name)
+    } else {
+      setChecked(false)
+      setCheckedName('')
+    }
+  }
 
   const passwordGenerated = (checkbox, rangeValue) => {
     const pwd = generatePassword(checkbox, rangeValue)
     setPassword(pwd)
+    setPasswordProps(checkbox)
   }
 
   const onChangeSlider = e => {
     setRangeValue(e.target.value);
+    setPasswordLength(e.target.value)
+    setRange(e.target.value)
+    passwordGenerated(checkbox, e.target.value)
   };
 
   const onChangeCheckBox = e => {
@@ -65,7 +91,10 @@ const Container = (props) => {
     CHECKBOX_LIST.map(checkbox => {
       if (checkbox.name === name) {
         checkbox.isChecked = checked;
-        setCheckBox({ [name]: checkbox.isChecked})
+        // setCheckBox({ [name]: checkbox.isChecked})
+        setCheckBox(prevState => ({ ...prevState, [name]: checkbox.isChecked}))
+        setPasswordLength(rangeValue)
+        setRangeValue(rangeValue)
       }
       return '';
     });
@@ -100,7 +129,9 @@ const Container = (props) => {
                 label={checkbox.label}
                 value={checkbox.isChecked}
                 onChange={onChangeCheckBox}
-                disabled={false}
+                disabled={
+                  checked && checkbox.isChecked &&checkedName === checkbox.name
+                }
               />
             ))}
           </div>
