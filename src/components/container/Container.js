@@ -120,7 +120,7 @@ const Container = props => {
 
   return (
     <div className='password-settings'>
-      <h3>Use slide to select from the optiions.</h3>
+      <h3>Use slider to select from the options.</h3>
       <div className='row'>
         <div className='col-md-12'>
           <div className='form group'>
